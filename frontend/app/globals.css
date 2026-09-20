@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Trust-blue / near-black security-terminal palette. Verdict colors
+     (verified/rejected/pending) are reserved exclusively for the
+     terminal/citizen verification states -- never used decoratively. */
+  --color-canvas: #0b1220;
+  --color-surface: #101a2e;
+  --color-elevated: #1c2b4a;
+  --color-accent-blue: #3b6fe0;
+  --color-primary: #eaf0ff;
+  --color-muted: #8fa2c9;
+
+  --color-verified: #22c55e;
+  --color-rejected: #ef4444;
+  --color-pending: #f5a623;
+
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-primary);
+  font-family: var(--font-sans);
+}
+
+/* Motion baseline: animate transform/opacity only, keep durations short,
+   and respect reduced-motion per the emil-design-eng guidance. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

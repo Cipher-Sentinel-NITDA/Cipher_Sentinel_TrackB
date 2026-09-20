@@ -35,7 +35,7 @@ export default function Home() {
             href={route.href}
             className="group flex flex-col gap-2 rounded-xl border border-elevated bg-surface p-6 transition-[transform,border-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:border-accent-blue active:scale-[0.98]"
           >
-            <span className="font-mono text-xs uppercase tracking-widest text-accent-blue">
+            <span className="font-mono text-xs uppercase tracking-widest text-accent-text">
               {route.href}
             </span>
             <span className="text-lg font-semibold text-foreground">

@@ -11,7 +11,14 @@
   --color-canvas: #0b1220;
   --color-surface: #101a2e;
   --color-elevated: #1c2b4a;
-  --color-accent-blue: #3b6fe0;
+  /* Background/border/ring use (buttons, focus rings) -- darkened from the
+     original #3b6fe0 so white button text clears WCAG AA 4.5:1 (was 4.06,
+     now 4.85). See accent-text below for standalone text/label use. */
+  --color-accent-blue: #3363cc;
+  /* Standalone text/label use on dark backgrounds (labels, links, badge
+     text) -- accent-blue itself is too dark to hit 4.5:1 as text-on-canvas
+     (3.39), so this is a separate, lighter tint (7.48 on canvas). */
+  --color-accent-text: #7aa3f5;
 
   --color-verified: #22c55e;
   --color-rejected: #ef4444;
@@ -60,16 +67,29 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Motion baseline: animate transform/opacity only, keep durations short,
-   and respect reduced-motion per the emil-design-eng guidance. */
+/* Motion baseline: animate transform/opacity only, keep durations short.
+   Reduced motion means fewer/gentler animations, not zero -- decorative
+   looping motion (PulseDot's ping/pulse) is cut to a single near-instant
+   iteration, but the spinner keeps spinning (it's functional "still
+   working" feedback, not decoration) and the verdict banner keeps a
+   gentle opacity fade instead of losing its transition entirely. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  [data-slot="spinner"] {
+    animation-duration: 1s !important;
+    animation-iteration-count: infinite !important;
+  }
+
+  .fade-scale-in {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
   }
 }
 
@@ -104,12 +124,13 @@
   --sidebar-ring: var(--color-accent-blue);
 }
 
-/* Verdict banner enter transition. Paired with `key={status}` on the
-   banner element so each status change is a fresh DOM node and
-   @starting-style re-triggers -- a CSS transition (interruptible), not a
-   keyframe animation, per the emil-design-eng guidance for rapidly-
-   swapping, state-driven UI. */
-.verdict-banner {
+/* Generic enter transition for content that newly appears (QR card, the
+   verdict banner, the disclosure approval card). On the verdict banner
+   specifically, pair with `key={status}` so each status change is a fresh
+   DOM node and @starting-style re-triggers -- a CSS transition
+   (interruptible), not a keyframe animation, per the emil-design-eng
+   guidance for rapidly-swapping, state-driven UI. */
+.fade-scale-in {
   opacity: 1;
   transform: scale(1);
   transition:

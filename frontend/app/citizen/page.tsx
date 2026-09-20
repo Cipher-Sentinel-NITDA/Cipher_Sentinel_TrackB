@@ -121,7 +121,7 @@ export default function CitizenPage() {
           <p className="text-sm text-rejected">{state.message}</p>
           <button
             type="button"
-            className="text-sm text-accent-blue underline"
+            className="text-sm text-accent-text underline"
             onClick={handleDecline}
           >
             Back

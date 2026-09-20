@@ -179,7 +179,7 @@ export default function TerminalPage() {
     <main className="flex flex-1 flex-col items-center justify-center gap-6 px-6 py-16">
       {state.status === "idle" && (
         <div className="flex flex-col items-center gap-4 text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-blue">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
             Merchant Terminal
           </p>
           <h1 className="text-2xl font-semibold text-foreground">Ready to verify</h1>

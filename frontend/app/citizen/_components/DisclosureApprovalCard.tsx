@@ -20,12 +20,12 @@ export function DisclosureApprovalCard({
   onDecline,
 }: DisclosureApprovalCardProps) {
   return (
-    <Card className="w-full max-w-md">
+    <Card className="fade-scale-in w-full max-w-md">
       <CardHeader>
         <CardTitle>Share verification proof?</CardTitle>
         <CardDescription>
           The merchant terminal is asking to verify:{" "}
-          <span className="font-mono text-xs text-accent-blue">{requestedClaim}</span>
+          <span className="font-mono text-xs text-accent-text">{requestedClaim}</span>
         </CardDescription>
       </CardHeader>
       <CardContent>

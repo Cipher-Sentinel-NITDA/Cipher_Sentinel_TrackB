@@ -44,7 +44,7 @@ export function QrCode({ value, size = 220 }: QrCodeProps) {
   }
 
   return (
-    <div className="inline-flex rounded-xl bg-white p-4 shadow-lg">
+    <div className="fade-scale-in inline-flex rounded-xl bg-white p-4 shadow-lg">
       {/* eslint-disable-next-line @next/next/no-img-element -- data: URL, not an optimizable static asset */}
       <img src={dataUrl} width={size} height={size} alt="Verification request QR code" />
     </div>

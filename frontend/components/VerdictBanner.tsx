@@ -23,7 +23,7 @@ const statusStyles: Record<VerdictStatus, { ring: string; badge: string; icon: s
 };
 
 // `key={status}` forces a fresh DOM node on every status change, so the
-// .verdict-banner class's @starting-style transition re-triggers each
+// .fade-scale-in class's @starting-style transition re-triggers each
 // time -- verified, then tampered-rejected, then replay-rejected all get
 // their own distinct entrance, not one animation that only plays once.
 export function VerdictBanner({ status, title, subtitle }: VerdictBannerProps) {
@@ -33,7 +33,7 @@ export function VerdictBanner({ status, title, subtitle }: VerdictBannerProps) {
     <Card
       key={status}
       className={cn(
-        "verdict-banner w-full max-w-md items-center gap-3 px-8 py-10 text-center ring-2",
+        "fade-scale-in w-full max-w-md items-center gap-3 px-8 py-10 text-center ring-2",
         styles.ring
       )}
     >

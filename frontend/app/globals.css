@@ -12,8 +12,6 @@
   --color-surface: #101a2e;
   --color-elevated: #1c2b4a;
   --color-accent-blue: #3b6fe0;
-  --color-primary: #eaf0ff;
-  --color-muted: #8fa2c9;
 
   --color-verified: #22c55e;
   --color-rejected: #ef4444;
@@ -41,9 +39,11 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
+  --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
@@ -76,30 +76,30 @@
 :root,
 .dark {
   --background: var(--color-canvas);
-  --foreground: var(--color-primary);
+  --foreground: #eaf0ff;
   --card: var(--color-surface);
-  --card-foreground: var(--color-primary);
+  --card-foreground: var(--foreground);
   --popover: var(--color-surface);
-  --popover-foreground: var(--color-primary);
+  --popover-foreground: var(--foreground);
   --primary: var(--color-accent-blue);
-  --primary-foreground: var(--color-primary);
+  --primary-foreground: var(--foreground);
   --secondary: var(--color-elevated);
-  --secondary-foreground: var(--color-primary);
+  --secondary-foreground: var(--foreground);
   --muted: var(--color-surface);
-  --muted-foreground: var(--color-muted);
+  --muted-foreground: #8fa2c9;
   --accent: var(--color-elevated);
-  --accent-foreground: var(--color-primary);
+  --accent-foreground: var(--foreground);
   --destructive: var(--color-rejected);
   --border: var(--color-elevated);
   --input: var(--color-elevated);
   --ring: var(--color-accent-blue);
   --radius: 0.625rem;
   --sidebar: var(--color-surface);
-  --sidebar-foreground: var(--color-primary);
+  --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--color-accent-blue);
-  --sidebar-primary-foreground: var(--color-primary);
+  --sidebar-primary-foreground: var(--foreground);
   --sidebar-accent: var(--color-elevated);
-  --sidebar-accent-foreground: var(--color-primary);
+  --sidebar-accent-foreground: var(--foreground);
   --sidebar-border: var(--color-elevated);
   --sidebar-ring: var(--color-accent-blue);
 }

@@ -17,13 +17,13 @@ export default function Home() {
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-12 px-6 py-24">
       <div className="flex flex-col items-center gap-3 text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
           Fact Proofing Without Records
         </p>
         <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
           Sentinel Verification
         </h1>
-        <p className="max-w-md text-sm text-muted">
+        <p className="max-w-md text-sm text-muted-foreground">
           Prove a fact, not a file. Pick a screen to open.
         </p>
       </div>
@@ -38,10 +38,10 @@ export default function Home() {
             <span className="font-mono text-xs uppercase tracking-widest text-accent-blue">
               {route.href}
             </span>
-            <span className="text-lg font-semibold text-primary">
+            <span className="text-lg font-semibold text-foreground">
               {route.label}
             </span>
-            <span className="text-sm text-muted">{route.description}</span>
+            <span className="text-sm text-muted-foreground">{route.description}</span>
           </Link>
         ))}
       </div>

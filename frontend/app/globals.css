@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Trust-blue / near-black security-terminal palette. Verdict colors
+     (verified/rejected/pending) are reserved exclusively for the
+     terminal/citizen verification states -- never used decoratively. */
+  --color-canvas: #0b1220;
+  --color-surface: #101a2e;
+  --color-elevated: #1c2b4a;
+  /* Background/border/ring use (buttons, focus rings) -- darkened from the
+     original #3b6fe0 so white button text clears WCAG AA 4.5:1 (was 4.06,
+     now 4.85). See accent-text below for standalone text/label use. */
+  --color-accent-blue: #3363cc;
+  /* Standalone text/label use on dark backgrounds (labels, links, badge
+     text) -- accent-blue itself is too dark to hit 4.5:1 as text-on-canvas
+     (3.39), so this is a separate, lighter tint (7.48 on canvas). */
+  --color-accent-text: #7aa3f5;
+
+  --color-verified: #22c55e;
+  --color-rejected: #ef4444;
+  --color-pending: #f5a623;
+
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+  --font-heading: var(--font-sans);
+
+  /* shadcn/ui tokens -- remapped to the palette above rather than its
+     neutral-gray defaults. This is a fixed dark security-terminal
+     aesthetic, not a user-toggleable theme, so :root and .dark carry the
+     same values (see below). */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Motion baseline: animate transform/opacity only, keep durations short.
+   Reduced motion means fewer/gentler animations, not zero -- decorative
+   looping motion (PulseDot's ping/pulse) is cut to a single near-instant
+   iteration, but the spinner keeps spinning (it's functional "still
+   working" feedback, not decoration) and the verdict banner keeps a
+   gentle opacity fade instead of losing its transition entirely. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-slot="spinner"] {
+    animation-duration: 1s !important;
+    animation-iteration-count: infinite !important;
+  }
+
+  .fade-scale-in {
+    transform: none !important;
+    transition: opacity 200ms ease !important;
+  }
+}
+
+:root,
+.dark {
+  --background: var(--color-canvas);
+  --foreground: #eaf0ff;
+  --card: var(--color-surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--foreground);
+  --primary: var(--color-accent-blue);
+  --primary-foreground: var(--foreground);
+  --secondary: var(--color-elevated);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--color-surface);
+  --muted-foreground: #8fa2c9;
+  --accent: var(--color-elevated);
+  --accent-foreground: var(--foreground);
+  --destructive: var(--color-rejected);
+  --border: var(--color-elevated);
+  --input: var(--color-elevated);
+  --ring: var(--color-accent-blue);
+  --radius: 0.625rem;
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--color-accent-blue);
+  --sidebar-primary-foreground: var(--foreground);
+  --sidebar-accent: var(--color-elevated);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--color-elevated);
+  --sidebar-ring: var(--color-accent-blue);
+}
+
+/* Generic enter transition for content that newly appears (QR card, the
+   verdict banner, the disclosure approval card). On the verdict banner
+   specifically, pair with `key={status}` so each status change is a fresh
+   DOM node and @starting-style re-triggers -- a CSS transition
+   (interruptible), not a keyframe animation, per the emil-design-eng
+   guidance for rapidly-swapping, state-driven UI. */
+.fade-scale-in {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 200ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
